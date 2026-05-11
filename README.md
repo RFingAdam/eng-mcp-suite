@@ -1,0 +1,143 @@
+# eng-mcp-suite
+
+**An all-inclusive engineering MCP catalog for RF / EMC / PCB / SI / lab-test.**
+
+A single installer that lets you bring up a Claude Desktop / Claude Code
+environment with every engineering MCP server you need — pre-configured,
+namespaced, and grouped by workflow.
+
+## What's included
+
+This suite catalogs **17 engineering MCP servers** across the simulation,
+analysis, and lab-test stack. Five are public today; the rest are private
+(internal RFingAdam team) but documented for reference.
+
+| Category | MCP server | Status | What it does |
+|---|---|---|---|
+| **RF / Transmission lines** | `lineforge` | 🟢 public | Z₀, εeff, L, C, Rs, Gp for any 2D cross-section. Closed-form + bitmap. atlc2-compatible. |
+| **EM simulation** | `mcp-openems` | 🔒 private | 3D FDTD via openEMS — antennas, transmission lines, vias |
+| | `mcp-nec2-antenna` | 🔒 private | Wire-antenna method-of-moments |
+| | `mcp-cst-studio` | 💼 commercial | CST Studio Suite |
+| | `hfss-agent` | 💼 commercial | Ansys HFSS |
+| **PCB / SI** | `mcp-pcb-emcopilot` | 🔒 private | Layout review, return paths, decoupling, DDR/PCIe/USB SI |
+| **Circuit simulation** | `mcp-ltspice-qucs` | 🔒 private | LTspice + Qucs-S + scikit-rf, all Touchstone-aware |
+| **EMC regulatory** | `mcp-emc-regulations` | 🟢 public | FCC, CISPR, IEC, ISO, automotive OEM, medical EMC lookup |
+| **Diagrams / docs** | `drawio-engineering-mcp` | 🟢 public | RF block diagrams, PCB stack-ups, EMC test setups |
+| **3D modeling** | `mcp-blender` | 🟢 public | 218 tools for 3D, MSFS content, physics, rendering |
+| **Remote access** | `mcp-remote-access` | 🟢 public | SSH + serial-port control for embedded devices |
+| **Lab test gear** | `copper-mountain-vna-mcp` | 🟢 public | Copper Mountain VNA (S-params, calibration, sweeps) |
+| | `mcp-rf-test` | 🔒 private | Wi-Fi / BLE / HaLow / LTE / LoRa compliance test automation |
+| | `mcp-rs-spectrum-analyzer` | 🔧 hardware | R&S FSW / FSVA / FSV / FPL spectrum analyzers |
+| | `mcp-rs-cmw500` | 🔧 hardware | R&S CMW500 comms tester |
+| | `mcp-rs-siggen` | 🔧 hardware | R&S signal generators (SMW, SMBV, SGT, etc.) |
+
+🟢 public = installable by anyone today
+🔒 private = pending audit + public release
+💼 commercial = requires commercial-software licenses
+🔧 hardware = requires specific lab equipment
+
+## Quick start (public starter pack)
+
+```bash
+# Install the 5 public engineering MCPs + lineforge in one shot
+pipx install eng-mcp-suite  # (coming soon)
+eng-mcp-suite install --workflow rf-design
+
+# Or pick a workflow bundle
+eng-mcp-suite install --workflow emc-compliance   # emc-regulations + drawio + remote-access
+eng-mcp-suite install --workflow pcb-review       # lineforge + drawio + (pcb-emcopilot when public)
+eng-mcp-suite install --workflow lab-automation   # vna + remote-access + (rs-* when hardware available)
+```
+
+`eng-mcp-suite` generates a merged `claude_desktop_config.json` snippet
+that wires every installed MCP into one running Claude Desktop instance.
+
+## Workflows
+
+These are curated bundles for common engineering tasks. Each bundle is a
+list of MCPs from the manifest that work well together.
+
+### `rf-design`
+For designing RF circuits and antennas.
+- `lineforge` — transmission lines
+- `mcp-openems` — 3D EM validation
+- `mcp-nec2-antenna` — wire antennas
+- `mcp-ltspice-qucs` — circuit + RF system simulation
+- `mcp-emc-regulations` — frequency-band lookups
+
+### `emc-compliance`
+For EMC certification work.
+- `mcp-emc-regulations` — FCC / CISPR / IEC / ISO limit lookups
+- `drawio-engineering-mcp` — test-setup diagrams
+- `mcp-rs-spectrum-analyzer` — emissions measurement (if you have R&S gear)
+- `mcp-pcb-emcopilot` — predictive layout review
+
+### `pcb-review`
+For PCB design review with EMC/SI focus.
+- `lineforge` — Z₀ and tolerance windows
+- `mcp-pcb-emcopilot` — return paths, decoupling, plane resonances
+- `drawio-engineering-mcp` — stack-up diagrams
+
+### `lab-automation`
+For test bench automation.
+- `copper-mountain-vna-mcp` — VNA control
+- `mcp-rs-spectrum-analyzer` — spectrum analyzer (if hardware)
+- `mcp-rs-siggen` — signal generators (if hardware)
+- `mcp-rf-test` — embedded device compliance
+- `mcp-remote-access` — SSH + serial to DUTs
+
+## How the MCPs tie together
+
+These aren't competing tools — they're **layers of the same stack**:
+
+```
+        ┌─────────────────────────────────────┐
+        │   AI agent (Claude Code / Desktop)  │
+        └──────┬──────────────┬───────────────┘
+               │              │ via MCP
+       ┌───────▼──────┐ ┌─────▼──────┐
+       │  lineforge   │ │  pcb-em…   │     ← fast inner loop:
+       │   (2D TEM)   │ │ (PCB/EMC)  │       closed-form + analysis
+       └───────┬──────┘ └────────────┘
+               │ Touchstone (.s2p)
+       ┌───────▼──────────────────────┐
+       │  openEMS / NEC2 / HFSS / CST │     ← 3D EM validation
+       │  (full-wave)                 │       where closed-form runs out
+       └──────────────────────────────┘
+               │
+       ┌───────▼──────────────────────┐
+       │  LTspice / Qucs-S / scikit-rf│     ← system-level circuit
+       │  (network-level)             │       integration
+       └──────────────────────────────┘
+               │
+       ┌───────▼──────────────────────┐
+       │  VNA / SA / Sig-gen / rf-test│     ← physical measurement
+       │  (lab hardware)              │       closes the loop
+       └──────────────────────────────┘
+```
+
+The lineforge L3 SIG1 case study
+([`examples/09_l3_sig1_em_validation/`](https://github.com/RFingAdam/lineforge/tree/main/examples/09_l3_sig1_em_validation))
+is exactly this pattern: closed-form lineforge ↔ openEMS FDTD cross-validation
+on a real RF design point.
+
+## Status
+
+This repo is **v0.1 scaffolding**. The `eng-mcp-suite` CLI/installer is
+not yet implemented; the [`manifest.yaml`](manifest.yaml) is the source
+of truth for what the suite knows about. As individual MCPs flip from
+private to public, they move up the manifest and get pip-installable
+packages on PyPI.
+
+### Roadmap
+
+- [ ] v0.1: catalog manifest + README (this commit)
+- [ ] v0.2: `eng-mcp-suite install` CLI that reads manifest, installs MCPs, generates Claude config
+- [ ] v0.3: per-workflow bundle commands
+- [ ] v0.4: per-MCP audit script (does it have a README, tests, version, working install?)
+- [ ] v1.0: first 8+ public MCPs all installable from PyPI, suite installer mature
+
+## License
+
+Apache 2.0 (catalog/installer code).
+Individual MCPs are licensed per their own repos (most GPL-3.0 or Apache 2.0).
