@@ -1,0 +1,246 @@
+# Engineering MCP Suite — manifest
+#
+# Catalog of MCP servers for RF / EMC / PCB / signal-integrity / lab-test
+# workflows. Each entry describes one MCP and how to install + register it.
+#
+# Categories: a server can belong to multiple categories.
+#   rf            — RF design, antennas, transmission lines
+#   emc           — EMC compliance, standards, simulation
+#   pcb           — PCB layout review, SI, decoupling
+#   em-sim        — Electromagnetic simulators (FDTD, MoM, FEM)
+#   circuit-sim   — Circuit-level simulators
+#   mechanical    — Mechanical CAD, FEA, thermal
+#   lab-test      — Instrument control (VNA, SA, signal gen)
+#   docs          — Documentation, diagrams, regulatory lookup
+#
+# Status:
+#   public        — Repo is public; can be installed by anyone
+#   private       — Repo is private; only RFingAdam team installs
+#   commercial    — Requires commercial-software licenses (HFSS, CST, etc.)
+#   hardware      — Requires specific lab hardware (R&S, Copper Mountain, etc.)
+#
+# Install methods:
+#   pip           — pip install <package>
+#   pipx          — pipx install <package>
+#   npm           — npm install -g <package>
+#   git           — pip install git+https://...
+#   manual        — see install_notes
+
+mcps:
+  # ── lineforge (the calculator this suite was extracted from) ──
+  - name: lineforge
+    description: |
+      Programmable transmission-line calculator. Closed-form analytical
+      solvers (microstrip, stripline, CPWG, diff pairs, three-conductor)
+      and bitmap FD-Laplace solver for arbitrary 2D cross-sections.
+      Computes Z₀, εeff, L, C, Rs, Gp. atlc2-format BMP compatible.
+      Validated against openEMS to ±2%.
+    categories: [rf, pcb, em-sim]
+    repo: https://github.com/RFingAdam/lineforge
+    status: public          # pending GitHub repo rename
+    install:
+      method: pip
+      package: lineforge
+    server_name: lineforge
+
+  # ── PUBLIC engineering MCPs (ship as v0.1 starter pack) ──
+
+  - name: mcp-emc-regulations
+    description: |
+      EMC/RF regulatory lookup. FCC Part 15/18/95, CISPR 11/12/14/22/25/32,
+      IEC 61000, ISO 11452/7637/16750, automotive OEM specs, medical
+      EMC requirements, ISM bands, LTE/NR/Wi-Fi/BLE limits.
+    categories: [emc, docs]
+    repo: https://github.com/RFingAdam/mcp-emc-regulations
+    status: public
+    install:
+      method: pipx
+      package: mcp-emc-regulations
+    server_name: emc-regulations
+
+  - name: drawio-engineering-mcp
+    description: |
+      Drawio diagrams for engineering — RF block diagrams, PCB stack-up
+      diagrams, EMC test setup illustrations. Exports to drawio XML / SVG.
+    categories: [docs, pcb, rf]
+    repo: https://github.com/RFingAdam/drawio-engineering-mcp
+    status: public
+    install:
+      method: pipx
+      package: drawio-engineering-mcp
+    server_name: drawio-engineering
+
+  - name: mcp-blender
+    description: |
+      Comprehensive Blender automation — 218 tools for 3D modeling,
+      AI-assisted asset generation, MSFS content creation, physics,
+      rendering. Useful for enclosure visualization and 3D EMC setups.
+    categories: [mechanical, docs]
+    repo: https://github.com/RFingAdam/mcp-blender
+    status: public
+    install:
+      method: git
+      package: git+https://github.com/RFingAdam/mcp-blender.git
+    server_name: blender
+
+  - name: mcp-remote-access
+    description: |
+      SSH + serial-port remote access. Drive embedded devices, lab
+      instruments, headless machines from the agent. Connection-pool
+      managed; long-lived sessions supported.
+    categories: [lab-test]
+    repo: https://github.com/RFingAdam/mcp-remote-access
+    status: public
+    install:
+      method: pipx
+      package: mcp-remote-access
+    server_name: remote-access
+
+  - name: copper-mountain-vna-mcp
+    description: |
+      Copper Mountain VNA control over TCP/IP SCPI. S-parameter capture,
+      calibration, sweep configuration, Touchstone export. The first
+      VNA MCP server.
+    categories: [lab-test, rf]
+    repo: https://github.com/RFingAdam/copper-mountain-vna-mcp
+    status: public
+    install:
+      method: pipx
+      package: copper-mountain-vna-mcp
+    server_name: copper-mountain-vna
+
+  # ── PRIVATE engineering MCPs (in suite for internal use; flip public as ready) ──
+
+  - name: mcp-openems
+    description: |
+      OpenEMS 3D FDTD simulation wrappers — antennas, transmission lines,
+      coupled-line filters, microstrip Z₀, vias. Generates Python scripts
+      for openEMS and parses results.
+    categories: [em-sim, rf]
+    repo: https://github.com/RFingAdam/mcp-openems
+    status: private
+    install:
+      method: git
+      package: git+ssh://git@github.com/RFingAdam/mcp-openems.git
+    server_name: openems
+
+  - name: mcp-nec2-antenna
+    description: |
+      NEC2 wire-antenna simulation. Dipole, inverted-V, Yagi, vertical,
+      loop. Returns gain patterns and impedance. Complements lineforge
+      (which is 2D quasi-TEM) with 3D wire-antenna physics.
+    categories: [em-sim, rf]
+    repo: https://github.com/RFingAdam/mcp-nec2-antenna
+    status: private
+    install:
+      method: git
+      package: git+ssh://git@github.com/RFingAdam/mcp-nec2-antenna.git
+    server_name: nec2-antenna
+
+  - name: mcp-pcb-emcopilot
+    description: |
+      PCB EMC + SI analysis copilot. Decoupling, vias, return paths,
+      crosstalk, plane resonances, DDR/PCIe/USB/Ethernet signal integrity,
+      EMI prediction, layout review automation.
+    categories: [pcb, emc]
+    repo: https://github.com/RFingAdam/mcp-pcb-emcopilot
+    status: private
+    install:
+      method: git
+      package: git+ssh://git@github.com/RFingAdam/mcp-pcb-emcopilot.git
+    server_name: pcb-emcopilot
+
+  - name: mcp-ltspice-qucs
+    description: |
+      LTspice + Qucs-S + scikit-rf bridge. Three servers in one suite for
+      RF filter design and multi-radio coexistence engineering. All
+      speaking Touchstone for interoperability with lineforge.
+    categories: [circuit-sim, rf]
+    repo: https://github.com/RFingAdam/mcp-ltspice-qucs
+    status: private
+    install:
+      method: git
+      package: git+ssh://git@github.com/RFingAdam/mcp-ltspice-qucs.git
+    server_name: ltspice-qucs
+
+  - name: mcp-rf-test
+    description: |
+      RF compliance test automation for embedded devices. Wi-Fi, BLE,
+      HaLow, LTE, LoRa. Power cycling, RX/TX configuration, statistics
+      collection.
+    categories: [lab-test, rf]
+    repo: https://github.com/RFingAdam/mcp-rf-test
+    status: private
+    install:
+      method: git
+      package: git+ssh://git@github.com/RFingAdam/mcp-rf-test.git
+    server_name: rf-test
+
+  # ── COMMERCIAL/HARDWARE MCPs (require licenses or specific equipment) ──
+
+  - name: mcp-cst-studio
+    description: |
+      CST Studio Suite (Dassault Systèmes) — full-wave 3D EM, antenna
+      design, PCB layout. Requires CST Studio license.
+    categories: [em-sim, rf]
+    repo: https://github.com/RFingAdam/mcp-cst-studio
+    status: commercial
+    install:
+      method: manual
+      install_notes: |
+        Requires CST Studio Suite installation + license. Contact
+        RFingAdam for access.
+    server_name: cst-studio
+
+  - name: hfss-agent
+    description: |
+      Ansys HFSS antenna design platform. Patch, dipole, horn, PIFA
+      automation. Requires Ansys HFSS license.
+    categories: [em-sim, rf]
+    repo: https://github.com/RFingAdam/hfss-agent
+    status: commercial
+    install:
+      method: manual
+      install_notes: |
+        Requires Ansys HFSS installation + license. Contact RFingAdam
+        for access.
+    server_name: hfss
+
+  - name: mcp-rs-spectrum-analyzer
+    description: |
+      Rohde & Schwarz spectrum analyzer control (FSW, FSVA3000, FSV3000,
+      FPL1000). Frequency sweeps, marker measurements, signal capture.
+    categories: [lab-test, rf]
+    repo: https://github.com/RFingAdam/mcp-rs-spectrum-analyzer
+    status: hardware
+    install:
+      method: manual
+      install_notes: |
+        Requires R&S spectrum analyzer hardware + GPIB/LAN connection.
+        Contact RFingAdam for access.
+    server_name: rs-spectrum-analyzer
+
+  - name: mcp-rs-cmw500
+    description: |
+      Rohde & Schwarz CMW500 radio communication tester. Cellular and
+      Wi-Fi compliance testing.
+    categories: [lab-test, rf]
+    repo: https://github.com/RFingAdam/mcp-rs-cmw500
+    status: hardware
+    install:
+      method: manual
+      install_notes: Requires R&S CMW500 hardware.
+    server_name: rs-cmw500
+
+  - name: mcp-rs-siggen
+    description: |
+      Rohde & Schwarz signal generators (SMW200A, SMBV100B, SGT100A,
+      SGS100A, SMA100B, SMB100A, SMBV100A, SMC100A). RF + baseband
+      signal generation, modulation, AWG.
+    categories: [lab-test, rf]
+    repo: https://github.com/RFingAdam/mcp-rs-siggen
+    status: hardware
+    install:
+      method: manual
+      install_notes: Requires R&S signal generator hardware.
+    server_name: rs-siggen
