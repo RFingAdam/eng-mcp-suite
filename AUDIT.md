@@ -1,6 +1,6 @@
 # Engineering MCP Suite — Repo Audit Report
 
-_Generated 2026-05-13 14:50 UTC_
+_Generated 2026-05-13 17:09 UTC_
 
 Per-repo readiness for flipping private → public, sorted by score.
 
