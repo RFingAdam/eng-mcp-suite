@@ -18,6 +18,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import subprocess
 import sys
@@ -32,6 +33,58 @@ sys.path.insert(0, str(ROOT / "src"))
 from eng_mcp_suite.manifest import MCPEntry, load_manifest  # noqa: E402
 
 
+def detect_license_family(text: str) -> tuple[str | None, bool]:
+    """Identify the license family from LICENSE file content.
+
+    Returns ``(spdx_id_or_None, is_proprietary)``. The boilerplate phrases
+    matched here are deliberately conservative — they're the canonical
+    opening lines of each license, not partial fragments that could appear
+    in other documents.
+
+    The ``is_proprietary`` flag is set when the file is explicitly
+    proprietary / all-rights-reserved, distinguishing it from the
+    "LICENSE exists but we can't identify it" case.
+    """
+    if not text:
+        return (None, False)
+
+    lower = text.lower()
+
+    # Check for canonical open-license headers FIRST. These match the
+    # unambiguous opening text of each license. The proprietary-detection
+    # fallback runs only if no open-license header matched, which avoids
+    # false positives from preamble text in (e.g.) GPL-3.0 that mentions
+    # the word "proprietary" while explaining what the license prevents.
+    if "gnu lesser general public license" in lower and "version 3" in lower:
+        return ("LGPL-3.0", False)
+    if "gnu general public license" in lower and "version 3" in lower:
+        return ("GPL-3.0", False)
+    if "gnu general public license" in lower and "version 2" in lower:
+        return ("GPL-2.0", False)
+    if "apache license" in lower and "version 2.0" in lower:
+        return ("Apache-2.0", False)
+    if "mozilla public license" in lower and "version 2.0" in lower:
+        return ("MPL-2.0", False)
+    if "permission is hereby granted, free of charge" in lower:
+        return ("MIT", False)
+    if "redistribution and use in source and binary forms" in lower:
+        if "neither the name" in lower:
+            return ("BSD-3-Clause", False)
+        return ("BSD-2-Clause", False)
+    if "the unlicense" in lower or "this is free and unencumbered software" in lower:
+        return ("Unlicense", False)
+
+    # Fallback: explicit-proprietary detection. Only reached if no known
+    # open-license header matched, so we won't false-positive on GPL
+    # preamble text talking about "proprietary".
+    if "all rights reserved" in lower and "permission is hereby" not in lower:
+        return ("Proprietary", True)
+    if "proprietary" in lower and "license" in lower:
+        return ("Proprietary", True)
+
+    return (None, False)
+
+
 @dataclass
 class RepoAudit:
     name: str
@@ -40,6 +93,8 @@ class RepoAudit:
     has_readme: bool = False
     readme_chars: int = 0
     has_license: bool = False
+    license_spdx: str | None = None
+    license_is_proprietary: bool = False
     has_tests: bool = False
     has_pyproject: bool = False
     has_package_json: bool = False
@@ -58,6 +113,11 @@ class RepoAudit:
         if self.error:
             return 0
         if self.status == "public":
+            # Even public repos fail the audit if LICENSE content is
+            # proprietary — a documented mismatch we want visible, not
+            # masked by the "public ⇒ 100" rule.
+            if self.license_is_proprietary:
+                return 50
             return 100
         score = 0
         if self.has_readme and self.readme_chars > 200:
@@ -127,6 +187,29 @@ def audit_repo(entry: MCPEntry) -> RepoAudit:
     a.has_license = info.get("license") is not None
     a.open_issues = info.get("open_issues_count", 0)
 
+    # License family — prefer GitHub's SPDX detection, fall back to
+    # reading the LICENSE file content and applying heuristics. GitHub
+    # returns null/NOASSERTION for proprietary or custom LICENSE files,
+    # which is exactly the case content-detection catches.
+    gh_lic = info.get("license") or {}
+    gh_spdx = gh_lic.get("spdx_id")
+    if gh_spdx and gh_spdx not in ("NOASSERTION", ""):
+        a.license_spdx = gh_spdx
+
+    license_blob = gh_api_json(f"repos/{owner}/{repo}/contents/LICENSE")
+    if license_blob and license_blob.get("content"):
+        try:
+            text = base64.b64decode(license_blob["content"]).decode("utf-8", errors="replace")
+            detected, is_prop = detect_license_family(text)
+            a.license_is_proprietary = is_prop
+            # Detected content wins over GitHub's classifier when GitHub
+            # returned nothing useful or when the content is proprietary.
+            if is_prop or not a.license_spdx:
+                a.license_spdx = detected or a.license_spdx
+            a.has_license = True
+        except (ValueError, UnicodeDecodeError):
+            pass
+
     pushed_at = info.get("pushed_at")
     if pushed_at:
         pushed = datetime.fromisoformat(pushed_at.replace("Z", "+00:00"))
@@ -179,8 +262,19 @@ def audit_repo(entry: MCPEntry) -> RepoAudit:
     elif a.readme_chars < 500:
         a.notes.append(f"thin README ({a.readme_chars}B)")
 
-    if not a.has_license and a.status != "public":
-        a.notes.append("no LICENSE")
+    if not a.has_license:
+        if a.status == "public":
+            a.notes.append("⚠ no LICENSE on public repo")
+        else:
+            a.notes.append("no LICENSE")
+
+    # License-content checks
+    if a.license_is_proprietary and a.status == "public":
+        a.notes.append("⚠ Proprietary LICENSE on public repo")
+    elif a.license_is_proprietary:
+        a.notes.append("Proprietary LICENSE")
+    elif a.has_license and not a.license_spdx:
+        a.notes.append("unidentified LICENSE")
 
     return a
 
@@ -198,12 +292,17 @@ def emit_markdown(audits: list[RepoAudit]) -> str:
     lines.append("")
     lines.append("Per-repo readiness for flipping private → public, sorted by score.")
     lines.append("")
-    lines.append("| Repo | Status | Score | README | LICENSE | Tests | pyproject | Tag | Last push | Notes |")
+    lines.append("| Repo | Status | Score | README | License | Tests | pyproject | Tag | Last push | Notes |")
     lines.append("|---|---|---|---|---|---|---|---|---|---|")
     for a in audits_sorted:
         score = f"{a.readiness_score} {a.readiness_label}"
         readme = "✓" if a.has_readme else "✗"
-        license_ = "✓" if a.has_license else "✗"
+        if not a.has_license:
+            license_ = "✗"
+        elif a.license_spdx:
+            license_ = a.license_spdx
+        else:
+            license_ = "?"
         tests = "✓" if a.has_tests else "✗"
         pkg = "✓" if (a.has_pyproject or a.has_package_json) else "✗"
         tag = a.latest_tag or "—"
