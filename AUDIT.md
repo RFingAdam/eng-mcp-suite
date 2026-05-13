@@ -1,6 +1,6 @@
 # Engineering MCP Suite — Repo Audit Report
 
-_Generated 2026-05-13 02:49 UTC_
+_Generated 2026-05-13 03:04 UTC_
 
 Per-repo readiness for flipping private → public, sorted by score.
 
@@ -11,16 +11,16 @@ Per-repo readiness for flipping private → public, sorted by score.
 | lineforge | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v2.1.0 | 0d ago | active (0d) |
 | mcp-blender | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.3.0 | 0d ago | active (0d) |
 | mcp-emc-regulations | public | 100 ✅ already public | ✓ | ✗ | ✓ | ✓ | — | 0d ago | active (0d) |
-| mcp-ltspice-qucs | public | 100 ✅ already public | ✓ | ✓ | ✗ | ✓ | v0.3.0 | 0d ago | active (0d) |
-| mcp-nec2-antenna | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
-| mcp-pcb-emcopilot | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
+| mcp-ltspice-qucs | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.3.0 | 0d ago | active (0d) |
+| mcp-nec2-antenna | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.1.0 | 0d ago | active (0d) |
+| mcp-openems | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.1.0 | 0d ago | active (0d) |
+| mcp-pcb-emcopilot | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.2.0 | 0d ago | active (0d) |
 | mcp-remote-access | public | 100 ✅ already public | ✓ | ✓ | ✗ | ✓ | — | 0d ago | active (0d) |
-| mcp-rs-cmw500 | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
-| mcp-rs-siggen | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
-| mcp-rs-spectrum-analyzer | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
+| mcp-rs-cmw500 | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.2.0 | 0d ago | active (0d) |
+| mcp-rs-siggen | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.1.0 | 0d ago | active (0d) |
+| mcp-rs-spectrum-analyzer | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.2.0 | 0d ago | active (0d) |
 | mcp-cst-studio | commercial | 90 🟢 ready to flip | ✓ | ✓ | ✓ | ✓ | — | 48d ago |  |
 | mcp-rf-test | private | 90 🟢 ready to flip | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
-| mcp-openems | private | 60 🟡 needs minor polish | ✓ | ✓ | ✗ | ✓ | — | 97d ago |  |
 
 ## Legend
 

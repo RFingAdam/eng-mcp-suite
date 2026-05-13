@@ -122,10 +122,10 @@ mcps:
       for openEMS and parses results.
     categories: [em-sim, rf]
     repo: https://github.com/RFingAdam/mcp-openems
-    status: private
+    status: public
     install:
       method: git
-      package: git+ssh://git@github.com/RFingAdam/mcp-openems.git
+      package: git+https://github.com/RFingAdam/mcp-openems.git
     server_name: openems
 
   - name: mcp-nec2-antenna

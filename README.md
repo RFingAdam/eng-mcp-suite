@@ -14,7 +14,7 @@ analysis, and lab-test stack.
 | Category | MCP server | Status | What it does |
 |---|---|---|---|
 | **RF / Transmission lines** | `lineforge` | 🟢 public | Z₀, εeff, L, C, Rs, Gp for any 2D cross-section. Closed-form + bitmap. atlc2-compatible. |
-| **EM simulation** | `mcp-openems` | 🔒 private | 3D FDTD via openEMS — antennas, transmission lines, vias |
+| **EM simulation** | `mcp-openems` | 🟢 public | 3D FDTD via openEMS — antennas, transmission lines, vias |
 | | `mcp-nec2-antenna` | 🟢 public | Wire-antenna method-of-moments |
 | | `mcp-cst-studio` | 💼 commercial | CST Studio Suite |
 | **PCB / SI** | `mcp-pcb-emcopilot` | 🟢 public | Layout review, return paths, decoupling, DDR/PCIe/USB SI |
