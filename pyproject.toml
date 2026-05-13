@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "eng-mcp-suite"
-version = "0.2.0"
+version = "0.3.0"
 description = "All-inclusive engineering MCP catalog and installer for RF, EMC, PCB, SI, and lab-test workflows"
 readme = "README.md"
 license = { text = "Apache-2.0" }

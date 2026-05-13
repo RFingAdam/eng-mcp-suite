@@ -1,0 +1,68 @@
+# Example user-local private manifest for eng-mcp-suite
+#
+# Copy this file to:
+#   ~/.config/eng_mcp_suite/private.yaml
+#
+# Or point at it explicitly:
+#   eng-mcp-suite list --include-private --private-manifest /path/to/this.yaml
+#   export ENG_MCP_SUITE_PRIVATE_MANIFEST=/path/to/this.yaml
+#
+# Then opt in:
+#   eng-mcp-suite list   --include-private
+#   eng-mcp-suite install --workflow rf-design --include-private
+#   eng-mcp-suite config  --include-private --out claude_desktop_config.json
+#
+# Schema is identical to the bundled data/manifest.yaml. The names below
+# are placeholders — replace them with your own private MCPs.
+
+mcps:
+
+  # Example 1 — an internal company tool installed from a private git remote
+  - name: my-internal-tool
+    description: |
+      Custom widget API for our internal CI pipeline. Wraps the in-house
+      automation harness so Claude can drive it directly.
+    categories: [lab-test]
+    repo: https://github.internal.example.com/myorg/widget-mcp
+    status: private
+    install:
+      method: git
+      package: git+ssh://git@github.internal.example.com/myorg/widget-mcp.git
+      install_notes: |
+        Requires VPN access to github.internal.example.com and a
+        configured SSH key for the myorg organization.
+    server_name: widget
+
+  # Example 2 — a licensed third-party MCP that isn't in the public catalog
+  - name: our-test-bench-mcp
+    description: |
+      Driver for the in-lab automated test bench. Talks to the bench
+      controller over LAN and exposes a small tool surface (run-sequence,
+      get-status, abort).
+    categories: [lab-test]
+    repo: https://github.internal.example.com/myorg/test-bench-mcp
+    status: private
+    install:
+      method: pip
+      package: our-test-bench-mcp
+      install_notes: |
+        Available on the internal PyPI mirror at
+        https://pypi.internal.example.com/simple/ — configure pip to use
+        the mirror before installing.
+    server_name: test-bench
+
+  # Example 3 — an upstream public MCP, but pinned to a fork
+  #
+  # Same `name` as a public catalog entry means the private entry wins on
+  # merge. Useful for pointing at a fork or pinning a specific version
+  # without forking the eng-mcp-suite catalog itself.
+  #
+  # - name: mcp-openems
+  #   description: Internal fork of mcp-openems with patched mesh adapter
+  #   categories: [em-sim, rf]
+  #   repo: https://github.internal.example.com/myorg/mcp-openems-fork
+  #   status: private
+  #   install:
+  #     method: git
+  #     package: git+ssh://git@github.internal.example.com/myorg/mcp-openems-fork.git@stable
+  #   server_name: openems

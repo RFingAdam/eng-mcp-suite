@@ -13,6 +13,11 @@ from rich.table import Table
 from eng_mcp_suite import __version__
 from eng_mcp_suite.installer import generate_claude_desktop_config, install_entry
 from eng_mcp_suite.manifest import WORKFLOWS, load_manifest
+from eng_mcp_suite.private_manifest import (
+    DEFAULT_PRIVATE_PATH,
+    load_merged_manifest,
+    resolve_private_path,
+)
 
 app = typer.Typer(
     name="eng-mcp-suite",
@@ -46,9 +51,11 @@ def list_cmd(
     status: Annotated[str | None, typer.Option(help="Filter by status: public, private, commercial, hardware")] = None,
     category: Annotated[str | None, typer.Option(help="Filter by category: rf, emc, pcb, em-sim, circuit-sim, mechanical, lab-test, docs")] = None,
     workflow: Annotated[str | None, typer.Option(help=f"Filter by workflow bundle: {', '.join(WORKFLOWS.keys())}")] = None,
+    include_private: Annotated[bool, typer.Option("--include-private", help=f"Also include entries from {DEFAULT_PRIVATE_PATH}")] = False,
+    private_manifest: Annotated[Path | None, typer.Option(help="Override path to the private manifest file")] = None,
 ) -> None:
     """List MCPs in the catalog."""
-    mf = load_manifest()
+    mf = load_merged_manifest(include_private=include_private, private_path=private_manifest)
     entries = mf.mcps
 
     if workflow:
@@ -114,9 +121,11 @@ def install(
     workflow: Annotated[str | None, typer.Option(help=f"Install a workflow bundle: {', '.join(WORKFLOWS.keys())}")] = None,
     public_only: Annotated[bool, typer.Option(help="Only install public MCPs")] = True,
     dry_run: Annotated[bool, typer.Option("--dry-run", help="Print install commands without running them")] = False,
+    include_private: Annotated[bool, typer.Option("--include-private", help=f"Also include entries from {DEFAULT_PRIVATE_PATH}")] = False,
+    private_manifest: Annotated[Path | None, typer.Option(help="Override path to the private manifest file")] = None,
 ) -> None:
     """Install one or more MCPs."""
-    mf = load_manifest()
+    mf = load_merged_manifest(include_private=include_private, private_path=private_manifest)
     wanted_names: list[str] = []
 
     if workflow:
@@ -175,6 +184,8 @@ def config(
     workflow: Annotated[str | None, typer.Option(help=f"Generate config for a workflow: {', '.join(WORKFLOWS.keys())}")] = None,
     public_only: Annotated[bool, typer.Option(help="Only include public MCPs")] = True,
     output: Annotated[Path | None, typer.Option("--out", "-o", help="Write to file instead of stdout")] = None,
+    include_private: Annotated[bool, typer.Option("--include-private", help=f"Also include entries from {DEFAULT_PRIVATE_PATH}")] = False,
+    private_manifest: Annotated[Path | None, typer.Option(help="Override path to the private manifest file")] = None,
 ) -> None:
     """Generate a Claude Desktop mcpServers config snippet for the chosen MCPs.
 
@@ -182,7 +193,7 @@ def config(
     your existing ~/Library/Application Support/Claude/claude_desktop_config.json
     or ~/.config/claude/claude_desktop_config.json.
     """
-    mf = load_manifest()
+    mf = load_merged_manifest(include_private=include_private, private_path=private_manifest)
 
     if workflow:
         if workflow not in WORKFLOWS:
