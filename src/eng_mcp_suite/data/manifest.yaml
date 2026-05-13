@@ -36,8 +36,8 @@ mcps:
       Computes Z₀, εeff, L, C, Rs, Gp. atlc2-format BMP compatible.
       Validated against openEMS to ±2%.
     categories: [rf, pcb, em-sim]
-    repo: https://github.com/RFingAdam/lineforge
-    status: public          # pending GitHub repo rename
+    repo: https://github.com/RFingAdam/atlc3
+    status: public          # GitHub repo still named "atlc3" (pending rename to "lineforge"; package name is already lineforge)
     install:
       method: pip
       package: lineforge
