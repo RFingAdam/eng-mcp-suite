@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  eng-mcp-suite logo template
+  ===========================
+  Parametric SVG. Drop this in at <repo>/assets/logo-banner.svg and edit
+  only the marked CUSTOMIZE blocks. Everything else is family-shared
+  identity.
+
+  CUSTOMIZE POINTS (per MCP):
+    1. title              short alt text; e.g. "mcp-emc-regulations · EMC limit lookup"
+    2. aria-label         same string, no line break
+    3. Inset glyph        paste a `use href="..."` from mcp-icon-glyphs.svg
+                          OR drop in custom paths sized to fit a 160x160 viewBox
+                          inside the badge (centered at translate(40, 40))
+    4. Glyph accent       change the value of the `.accent` style block
+                          (default cyan #22D3EE)
+    5. Wordmark text      replace "mcp-name" with the package name
+    6. Tagline text       one short line, about 60 chars max
+    7. Keyword row        dot-separated domain keywords
+    8. Surface pills      keep Python/CLI/MCP, swap license/version as needed
+    9. Version pill text  e.g. "v0.1.0" or omit the version-pill group entirely
+
+  GEOMETRY (do not change):
+    1280x320 viewBox, 16:4 aspect, matches lineforge banner.
+    Mark sits in left 280px. Wordmark/tagline anchor at x=320.
+    Background gradient + horizontal field-line accent are family-fixed.
+    Hex/badge mark uses 44px corner radius on a 240x240 surface.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320"
+     role="img" aria-label="mcp-name — short tagline goes here">
+  <title>mcp-name — short tagline goes here</title>
+
+  <defs>
+    <!-- Family-shared background gradient: deep navy to slate-navy -->
+    <linearGradient id="t-bg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#0B1220"/>
+      <stop offset="50%"  stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#0B1220"/>
+    </linearGradient>
+
+    <!-- Glow filter for the inset glyph (used by every MCP) -->
+    <filter id="t-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!--
+      CUSTOMIZE #4: domain accent.
+      Change just this style block (defaults to cyan).
+      Allowed: cyan #22D3EE, sky #0EA5E9, amber #F59E0B, gold #FBBF24,
+      emerald #34D399, violet #A78BFA, ink-muted #CBD5E1.
+    -->
+    <style>
+      .accent        { color: #22D3EE; }
+      .accent-stroke { stroke: #22D3EE; }
+      .accent-fill   { fill:   #22D3EE; }
+    </style>
+  </defs>
+
+  <!-- Background (family-fixed) -->
+  <rect width="1280" height="320" fill="url(#t-bg)"/>
+
+  <!-- Subtle horizontal field-line accent, same as lineforge -->
+  <g stroke="#1E293B" stroke-width="0.5" opacity="0.6">
+    <line x1="0" y1="40"  x2="1280" y2="40"/>
+    <line x1="0" y1="80"  x2="1280" y2="80"/>
+    <line x1="0" y1="240" x2="1280" y2="240"/>
+    <line x1="0" y1="280" x2="1280" y2="280"/>
+  </g>
+
+  <!-- Mark: rounded-rect badge + inset glyph -->
+  <g transform="translate(40, 40)">
+    <!-- Badge surface (family-fixed) -->
+    <rect x="0" y="0" width="240" height="240" rx="44" ry="44"
+          fill="#0B1220" stroke="#1E293B" stroke-width="1"/>
+
+    <!-- Inner hairline frame, family identity -->
+    <rect x="12" y="12" width="216" height="216" rx="34" ry="34"
+          fill="none" stroke="#1E293B" stroke-width="1" opacity="0.7"/>
+
+    <!--
+      CUSTOMIZE #3: domain glyph.
+      Replace the placeholder group below with either:
+        (a) a `use href="mcp-icon-glyphs.svg#g-waveform"` reference, OR
+        (b) raw path / group drawing geometry, OR
+        (c) a sub-banner like lineforge's cross-section.
+
+      The slot is centered in a 160x160 area at translate(40, 40) inside
+      the 240x240 badge. Use stroke-width 2 to stay consistent with the
+      family hairline weight. Stroke with class="accent-stroke" or fill
+      with class="accent-fill" to pick up the accent color.
+    -->
+    <g id="glyph-slot" transform="translate(40, 40)" filter="url(#t-glow)">
+      <!-- DEFAULT PLACEHOLDER: hex frame + crosshair.
+           Delete this whole group and substitute your glyph. -->
+      <g fill="none" class="accent-stroke" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 80 4 L 148 44 L 148 124 L 80 164 L 12 124 L 12 44 Z"
+              stroke-opacity="0.6"/>
+        <line x1="80" y1="42" x2="80" y2="122"/>
+        <line x1="42" y1="84" x2="118" y2="84"/>
+        <circle cx="80" cy="84" r="12" stroke-opacity="0.9"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Wordmark + tagline (right side) -->
+  <g font-family="ui-sans-serif, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif">
+
+    <!-- CUSTOMIZE #5: wordmark.
+         Replace "mcp-name". Pick font-size so the right edge clears x = 1240.
+         120px works for up to 6 chars; drop to 96px for 7 to 9 chars;
+         80px for longer. -->
+    <text x="320" y="170" font-size="120" font-weight="800"
+          fill="#F8FAFC" letter-spacing="-3">mcp-name</text>
+
+    <!-- CUSTOMIZE #9: version pill (optional, delete this whole group
+         if unused). Position x depends on wordmark width. For "mcp-name"
+         at 120px about x=640. For a wider wordmark, push it right or
+         move it down a line. -->
+    <g id="version-pill" transform="translate(640, 132)">
+      <rect x="0" y="0" width="58" height="30" rx="15"
+            fill="#0F172A" class="accent-stroke" stroke-width="1.5"/>
+      <text x="29" y="20" font-size="14" font-weight="700"
+            class="accent-fill" text-anchor="middle">v0.1.0</text>
+    </g>
+
+    <!-- CUSTOMIZE #6: tagline. One short line. -->
+    <text x="320" y="208" font-size="22" font-weight="500" fill="#94A3B8">
+      Open-source · MCP-enabled · short tagline goes here
+    </text>
+
+    <!-- CUSTOMIZE #7: keyword row. Dot-separated, lowercase, domain-specific. -->
+    <g font-size="14" font-weight="600" fill="#64748B">
+      <text x="320" y="240">keyword · keyword · keyword · keyword · keyword</text>
+    </g>
+
+    <!-- CUSTOMIZE #8: surface pills.
+         Standard family set is Python / CLI / MCP / License.
+         Swap pill text + accent color to taste. Keep widths tight to text. -->
+    <g transform="translate(320, 256)" font-size="13" font-weight="700">
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="62" height="22" rx="11" fill="#1E293B"/>
+        <text x="31" y="15" fill="#F59E0B" text-anchor="middle">Python</text>
+      </g>
+      <g transform="translate(72, 0)">
+        <rect x="0" y="0" width="44" height="22" rx="11" fill="#1E293B"/>
+        <text x="22" y="15" fill="#22D3EE" text-anchor="middle">CLI</text>
+      </g>
+      <g transform="translate(126, 0)">
+        <rect x="0" y="0" width="50" height="22" rx="11" fill="#1E293B"/>
+        <text x="25" y="15" fill="#A78BFA" text-anchor="middle">MCP</text>
+      </g>
+      <g transform="translate(186, 0)">
+        <rect x="0" y="0" width="86" height="22" rx="11" fill="#1E293B"/>
+        <text x="43" y="15" fill="#34D399" text-anchor="middle">License</text>
+      </g>
+    </g>
+  </g>
+</svg>
