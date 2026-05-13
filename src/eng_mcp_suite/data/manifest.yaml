@@ -131,10 +131,10 @@ mcps:
       (which is 2D quasi-TEM) with 3D wire-antenna physics.
     categories: [em-sim, rf]
     repo: https://github.com/RFingAdam/mcp-nec2-antenna
-    status: private
+    status: public
     install:
       method: git
-      package: git+ssh://git@github.com/RFingAdam/mcp-nec2-antenna.git
+      package: git+https://github.com/RFingAdam/mcp-nec2-antenna.git
     server_name: nec2-antenna
 
   - name: mcp-pcb-emcopilot
@@ -144,10 +144,10 @@ mcps:
       EMI prediction, layout review automation.
     categories: [pcb, emc]
     repo: https://github.com/RFingAdam/mcp-pcb-emcopilot
-    status: private
+    status: public
     install:
       method: git
-      package: git+ssh://git@github.com/RFingAdam/mcp-pcb-emcopilot.git
+      package: git+https://github.com/RFingAdam/mcp-pcb-emcopilot.git
     server_name: pcb-emcopilot
 
   - name: mcp-ltspice-qucs
@@ -157,10 +157,10 @@ mcps:
       speaking Touchstone for interoperability with lineforge.
     categories: [circuit-sim, rf]
     repo: https://github.com/RFingAdam/mcp-ltspice-qucs
-    status: private
+    status: public
     install:
       method: git
-      package: git+ssh://git@github.com/RFingAdam/mcp-ltspice-qucs.git
+      package: git+https://github.com/RFingAdam/mcp-ltspice-qucs.git
     server_name: ltspice-qucs
 
   - name: mcp-rf-test
@@ -212,12 +212,12 @@ mcps:
       FPL1000). Frequency sweeps, marker measurements, signal capture.
     categories: [lab-test, rf]
     repo: https://github.com/RFingAdam/mcp-rs-spectrum-analyzer
-    status: hardware
+    status: public
     install:
       method: manual
       install_notes: |
-        Requires R&S spectrum analyzer hardware + GPIB/LAN connection.
-        Contact RFingAdam for access.
+        Source is public, but requires R&S spectrum analyzer hardware
+        (FSW / FSVA / FSV / FPL) + GPIB or LAN connection to be useful.
     server_name: rs-spectrum-analyzer
 
   - name: mcp-rs-cmw500
@@ -226,10 +226,10 @@ mcps:
       Wi-Fi compliance testing.
     categories: [lab-test, rf]
     repo: https://github.com/RFingAdam/mcp-rs-cmw500
-    status: hardware
+    status: public
     install:
       method: manual
-      install_notes: Requires R&S CMW500 hardware.
+      install_notes: Source is public, but requires R&S CMW500 radio comms tester hardware to be useful.
     server_name: rs-cmw500
 
   - name: mcp-rs-siggen
@@ -239,8 +239,8 @@ mcps:
       signal generation, modulation, AWG.
     categories: [lab-test, rf]
     repo: https://github.com/RFingAdam/mcp-rs-siggen
-    status: hardware
+    status: public
     install:
       method: manual
-      install_notes: Requires R&S signal generator hardware.
+      install_notes: Source is public, but requires R&S signal generator hardware to be useful.
     server_name: rs-siggen
