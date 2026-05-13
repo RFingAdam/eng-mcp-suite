@@ -144,5 +144,6 @@ catalog entries and their status.
 
 ## License
 
-Apache 2.0 (catalog/installer code).
-Individual MCPs are licensed per their own repos (most GPL-3.0 or Apache 2.0).
+[AGPL-3.0-or-later](LICENSE) — for this catalog/installer and every
+public MCP in the toolkit. See [`LICENSE_SUMMARY.md`](LICENSE_SUMMARY.md)
+for the per-repo table and the rationale (share back, don't freeload).

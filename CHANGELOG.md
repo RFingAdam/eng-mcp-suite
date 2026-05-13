@@ -5,6 +5,48 @@ All notable changes to **eng-mcp-suite** are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] — 2026-05-13
+
+### Changed
+- **Toolkit-wide relicense to AGPL-3.0-or-later.** Every public MCP
+  in the catalog, plus this catalog/installer itself, is now licensed
+  under AGPL-3.0-or-later. The intent is to keep contributions flowing
+  upstream and prevent the closed-source SaaS-wrap freeloading that
+  permissive licenses allow.
+  
+  The 15 repos relicensed in this release (with the new version each
+  shipped):
+  - lineforge v2.2.0 (was GPL-3.0)
+  - eng-mcp-suite v1.1.0 (was Apache-2.0)
+  - mcp-emc-regulations v0.2.0 (was Apache-2.0, briefly stale-MIT-badge)
+  - mcp-pcb-emcopilot v0.3.0 (was Apache-2.0)
+  - mcp-openems v0.2.0 (was Apache-2.0)
+  - mcp-nec2-antenna v0.2.0 (was Apache-2.0)
+  - mcp-ltspice-qucs v0.4.0 (was Apache-2.0; all 4 workspace packages)
+  - drawio-engineering-mcp v1.1.0 (was Apache-2.0)
+  - mcp-blender v0.4.0 (was MIT)
+  - mcp-remote-access v0.2.0 (was Apache-2.0)
+  - copper-mountain-vna-mcp v0.3.0 (was Apache-2.0)
+  - mcp-rs-spectrum-analyzer v0.3.0 (was Apache-2.0)
+  - mcp-rs-cmw500 v0.3.0 (was Apache-2.0)
+  - mcp-rs-siggen v0.2.0 (was Apache-2.0)
+  - mcp-cst-studio v0.2.0 (was Apache-2.0)
+
+  mcp-rf-test stays private (proprietary org-internal); not in the
+  public catalog.
+
+  Existing permissively-licensed forks remain valid under their
+  original terms. The relicense applies to future commits and tagged
+  releases from upstream. GPL-3.0 → AGPL-3.0 is explicitly permitted
+  by GPL-3.0 §13 (relevant for lineforge).
+
+- `LICENSE_SUMMARY.md`: rewritten to reflect the AGPL-everywhere state
+  with rationale.
+- `README.md`: license section updated.
+
+### Added
+- AUDIT.md regenerated against the AGPL-everywhere state.
+
 ## [1.0.0] — 2026-05-13
 
 The 1.0 release is the **public-launch milestone** of the engineering
