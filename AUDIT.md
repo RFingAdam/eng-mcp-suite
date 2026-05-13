@@ -1,27 +1,26 @@
 # Engineering MCP Suite — Repo Audit Report
 
-_Generated 2026-05-13 01:42 UTC_
+_Generated 2026-05-13 02:49 UTC_
 
 Per-repo readiness for flipping private → public, sorted by score.
 
 | Repo | Status | Score | README | LICENSE | Tests | pyproject | Tag | Last push | Notes |
 |---|---|---|---|---|---|---|---|---|---|
-| copper-mountain-vna-mcp | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.2.0 | 6d ago | active (6d) |
-| drawio-engineering-mcp | public | 100 ✅ already public | ✓ | ✓ | ✗ | ✓ | — | 69d ago |  |
-| lineforge | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v2.0.0 | 0d ago | active (0d) |
-| mcp-blender | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.3.0 | 47d ago |  |
-| mcp-emc-regulations | public | 100 ✅ already public | ✓ | ✗ | ✓ | ✓ | — | 48d ago |  |
-| mcp-ltspice-qucs | public | 100 ✅ already public | ✓ | ✓ | ✗ | ✓ | v0.3.0 | 6d ago | active (6d) |
-| mcp-nec2-antenna | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 97d ago |  |
-| mcp-pcb-emcopilot | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 6d ago | active (6d) |
-| mcp-remote-access | public | 100 ✅ already public | ✓ | ✓ | ✗ | ✓ | — | 97d ago |  |
-| mcp-rs-cmw500 | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 80d ago |  |
-| mcp-rs-siggen | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 80d ago |  |
-| mcp-rs-spectrum-analyzer | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 80d ago |  |
+| copper-mountain-vna-mcp | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.2.0 | 0d ago | active (0d) |
+| drawio-engineering-mcp | public | 100 ✅ already public | ✓ | ✓ | ✗ | ✓ | — | 0d ago | active (0d) |
+| lineforge | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v2.1.0 | 0d ago | active (0d) |
+| mcp-blender | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | v0.3.0 | 0d ago | active (0d) |
+| mcp-emc-regulations | public | 100 ✅ already public | ✓ | ✗ | ✓ | ✓ | — | 0d ago | active (0d) |
+| mcp-ltspice-qucs | public | 100 ✅ already public | ✓ | ✓ | ✗ | ✓ | v0.3.0 | 0d ago | active (0d) |
+| mcp-nec2-antenna | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
+| mcp-pcb-emcopilot | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
+| mcp-remote-access | public | 100 ✅ already public | ✓ | ✓ | ✗ | ✓ | — | 0d ago | active (0d) |
+| mcp-rs-cmw500 | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
+| mcp-rs-siggen | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
+| mcp-rs-spectrum-analyzer | public | 100 ✅ already public | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
 | mcp-cst-studio | commercial | 90 🟢 ready to flip | ✓ | ✓ | ✓ | ✓ | — | 48d ago |  |
-| mcp-rf-test | private | 80 🟢 ready to flip | ✓ | ✓ | ✓ | ✓ | — | 99d ago |  |
-| mcp-openems | private | 60 🟡 needs minor polish | ✓ | ✓ | ✗ | ✓ | — | 96d ago |  |
-| hfss-agent | commercial | 40 🟠 needs audit | ✓ | ✓ | ✗ | ✗ | — | 133d ago |  |
+| mcp-rf-test | private | 90 🟢 ready to flip | ✓ | ✓ | ✓ | ✓ | — | 0d ago | active (0d) |
+| mcp-openems | private | 60 🟡 needs minor polish | ✓ | ✓ | ✗ | ✓ | — | 97d ago |  |
 
 ## Legend
 

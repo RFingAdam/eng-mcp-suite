@@ -196,20 +196,6 @@ mcps:
         RFingAdam for access.
     server_name: cst-studio
 
-  - name: hfss-agent
-    description: |
-      Ansys HFSS antenna design platform. Patch, dipole, horn, PIFA
-      automation. Requires Ansys HFSS license.
-    categories: [em-sim, rf]
-    repo: https://github.com/RFingAdam/hfss-agent
-    status: commercial
-    install:
-      method: manual
-      install_notes: |
-        Requires Ansys HFSS installation + license. Contact RFingAdam
-        for access.
-    server_name: hfss
-
   - name: mcp-rs-spectrum-analyzer
     description: |
       Rohde & Schwarz spectrum analyzer control (FSW, FSVA3000, FSV3000,

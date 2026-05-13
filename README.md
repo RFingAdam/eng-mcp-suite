@@ -8,19 +8,17 @@ namespaced, and grouped by workflow.
 
 ## What's included
 
-This suite catalogs **17 engineering MCP servers** across the simulation,
-analysis, and lab-test stack. Five are public today; the rest are private
-(internal RFingAdam team) but documented for reference.
+This suite catalogs **15 engineering MCP servers** across the simulation,
+analysis, and lab-test stack.
 
 | Category | MCP server | Status | What it does |
 |---|---|---|---|
 | **RF / Transmission lines** | `lineforge` | 🟢 public | Z₀, εeff, L, C, Rs, Gp for any 2D cross-section. Closed-form + bitmap. atlc2-compatible. |
 | **EM simulation** | `mcp-openems` | 🔒 private | 3D FDTD via openEMS — antennas, transmission lines, vias |
-| | `mcp-nec2-antenna` | 🔒 private | Wire-antenna method-of-moments |
+| | `mcp-nec2-antenna` | 🟢 public | Wire-antenna method-of-moments |
 | | `mcp-cst-studio` | 💼 commercial | CST Studio Suite |
-| | `hfss-agent` | 💼 commercial | Ansys HFSS |
-| **PCB / SI** | `mcp-pcb-emcopilot` | 🔒 private | Layout review, return paths, decoupling, DDR/PCIe/USB SI |
-| **Circuit simulation** | `mcp-ltspice-qucs` | 🔒 private | LTspice + Qucs-S + scikit-rf, all Touchstone-aware |
+| **PCB / SI** | `mcp-pcb-emcopilot` | 🟢 public | Layout review, return paths, decoupling, DDR/PCIe/USB SI |
+| **Circuit simulation** | `mcp-ltspice-qucs` | 🟢 public | LTspice + Qucs-S + scikit-rf, all Touchstone-aware |
 | **EMC regulatory** | `mcp-emc-regulations` | 🟢 public | FCC, CISPR, IEC, ISO, automotive OEM, medical EMC lookup |
 | **Diagrams / docs** | `drawio-engineering-mcp` | 🟢 public | RF block diagrams, PCB stack-ups, EMC test setups |
 | **3D modeling** | `mcp-blender` | 🟢 public | 218 tools for 3D, MSFS content, physics, rendering |
@@ -32,9 +30,18 @@ analysis, and lab-test stack. Five are public today; the rest are private
 | | `mcp-rs-siggen` | 🔧 hardware | R&S signal generators (SMW, SMBV, SGT, etc.) |
 
 🟢 public = installable by anyone today
-🔒 private = pending audit + public release
+🔒 private = internal/access-restricted (not installable from public PyPI)
 💼 commercial = requires commercial-software licenses
 🔧 hardware = requires specific lab equipment
+
+## Related tools (outside the MCP catalog)
+
+Standalone engineering apps from the same author that aren't MCPs but
+slot alongside the suite for the same workflows:
+
+| Tool | What it does |
+|---|---|
+| [**RFlect**](https://github.com/RFingAdam/RFlect) | Antenna visualization GUI — chamber measurements, VNA S-parameters, 2D/3D gain patterns, efficiency, TRP, group delay, S11/VSWR. Pairs with `copper-mountain-vna-mcp` and `mcp-nec2-antenna` outputs. |
 
 ## Quick start (public starter pack)
 
@@ -123,19 +130,17 @@ on a real RF design point.
 
 ## Status
 
-This repo is **v0.1 scaffolding**. The `eng-mcp-suite` CLI/installer is
-not yet implemented; the [`manifest.yaml`](manifest.yaml) is the source
-of truth for what the suite knows about. As individual MCPs flip from
-private to public, they move up the manifest and get pip-installable
-packages on PyPI.
+Current version: **v0.3.0**. The
+[manifest](src/eng_mcp_suite/data/manifest.yaml) is the source of truth
+for what the suite knows about. Use `eng-mcp-suite list` to see all
+catalog entries and their status.
 
 ### Roadmap
 
-- [ ] v0.1: catalog manifest + README (this commit)
-- [ ] v0.2: `eng-mcp-suite install` CLI that reads manifest, installs MCPs, generates Claude config
-- [ ] v0.3: per-workflow bundle commands
-- [ ] v0.4: per-MCP audit script (does it have a README, tests, version, working install?)
-- [ ] v1.0: first 8+ public MCPs all installable from PyPI, suite installer mature
+- [x] v0.1: catalog manifest + README
+- [x] v0.2: `eng-mcp-suite install` CLI + per-MCP audit script
+- [x] v0.3: private bolt-on mechanism — see [docs/PRIVATE_BOLT_ON.md](docs/PRIVATE_BOLT_ON.md)
+- [ ] v1.0: all Tier 1 public MCPs at 90+ polish score, eng-mcp-suite on PyPI
 
 ## License
 
