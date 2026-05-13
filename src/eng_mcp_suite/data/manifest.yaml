@@ -31,17 +31,21 @@ mcps:
   - name: lineforge
     description: |
       Programmable transmission-line calculator. Closed-form analytical
-      solvers (microstrip, stripline, CPWG, diff pairs, three-conductor)
-      and bitmap FD-Laplace solver for arbitrary 2D cross-sections.
-      Computes Z₀, εeff, L, C, Rs, Gp. atlc2-format BMP compatible.
-      Validated against openEMS to ±2%.
+      solvers (microstrip, stripline, CPWG, diff pairs, three-conductor),
+      bitmap FD-Laplace solver for arbitrary 2D cross-sections, plus
+      RF pad analytics (pad_capacitance, pad_relief_advisor),
+      path-budget calculator, design-rule classifier, and laminate
+      lookup. Computes Z₀, εeff, L, C, Rs, Gp. atlc2-format BMP
+      compatible. Validated against openEMS to ±2%.
     categories: [rf, pcb, em-sim]
-    repo: https://github.com/RFingAdam/atlc3
-    status: public          # GitHub repo still named "atlc3" (pending rename to "lineforge"; package name is already lineforge)
+    repo: https://github.com/RFingAdam/lineforge
+    docs: https://rfingadam.github.io/lineforge/
+    status: public
     install:
       method: pip
       package: lineforge
     server_name: lineforge
+    min_version: "2.1.0"
 
   # ── PUBLIC engineering MCPs (ship as v0.1 starter pack) ──
 
