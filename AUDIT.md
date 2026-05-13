@@ -1,6 +1,6 @@
 # Engineering MCP Suite — Repo Audit Report
 
-_Generated 2026-05-13 03:29 UTC_
+_Generated 2026-05-13 03:31 UTC_
 
 Per-repo readiness for flipping private → public, sorted by score.
 
@@ -10,7 +10,7 @@ Per-repo readiness for flipping private → public, sorted by score.
 | drawio-engineering-mcp | public | 100 ✅ already public | ✓ | Apache-2.0 | ✗ | ✓ | — | 0d ago | active (0d) |
 | lineforge | public | 100 ✅ already public | ✓ | GPL-3.0 | ✓ | ✓ | v2.1.0 | 0d ago | active (0d) |
 | mcp-blender | public | 100 ✅ already public | ✓ | MIT | ✓ | ✓ | v0.3.0 | 0d ago | active (0d) |
-| mcp-emc-regulations | public | 100 ✅ already public | ✓ | ✗ | ✓ | ✓ | — | 0d ago | active (0d); ⚠ no LICENSE on public repo |
+| mcp-emc-regulations | public | 100 ✅ already public | ✓ | Apache-2.0 | ✓ | ✓ | — | 0d ago | active (0d) |
 | mcp-ltspice-qucs | public | 100 ✅ already public | ✓ | Apache-2.0 | ✓ | ✓ | v0.3.0 | 0d ago | active (0d) |
 | mcp-nec2-antenna | public | 100 ✅ already public | ✓ | Apache-2.0 | ✓ | ✓ | v0.1.0 | 0d ago | active (0d) |
 | mcp-openems | public | 100 ✅ already public | ✓ | Apache-2.0 | ✓ | ✓ | v0.1.0 | 0d ago | active (0d) |
