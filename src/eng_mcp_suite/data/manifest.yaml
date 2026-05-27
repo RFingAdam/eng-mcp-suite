@@ -159,7 +159,7 @@ mcps:
       method: git
       package: git+https://github.com/RFingAdam/mcp-pcb-emcopilot.git
     server_name: pcb-emcopilot
-    min_version: "0.4.0"
+    min_version: "0.4.1"
 
   - name: mcp-ltspice-qucs
     description: |

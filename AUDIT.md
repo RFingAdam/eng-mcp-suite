@@ -1,6 +1,6 @@
 # Engineering MCP Suite — Repo Audit Report
 
-_Generated 2026-05-27 21:54 UTC_
+_Generated 2026-05-27 23:42 UTC_
 
 Per-repo readiness for flipping private → public, sorted by score.
 
@@ -15,7 +15,7 @@ Per-repo readiness for flipping private → public, sorted by score.
 | mcp-ltspice-qucs | public | 100 ✅ already public | ✓ | AGPL-3.0 | ✓ | ✓ | v0.4.0 | 14d ago | active (14d) |
 | mcp-nec2-antenna | public | 100 ✅ already public | ✓ | AGPL-3.0 | ✓ | ✓ | v0.2.0 | 14d ago | active (14d) |
 | mcp-openems | public | 100 ✅ already public | ✓ | AGPL-3.0 | ✓ | ✓ | v0.2.0 | 14d ago | active (14d) |
-| mcp-pcb-emcopilot | public | 100 ✅ already public | ✓ | AGPL-3.0 | ✓ | ✓ | v0.4.0 | 0d ago | active (0d) |
+| mcp-pcb-emcopilot | public | 100 ✅ already public | ✓ | AGPL-3.0 | ✓ | ✓ | v0.4.1 | 0d ago | active (0d) |
 | mcp-remote-access | public | 100 ✅ already public | ✓ | AGPL-3.0 | ✗ | ✓ | v0.2.0 | 14d ago | active (14d) |
 | mcp-rs-cmw500 | public | 100 ✅ already public | ✓ | AGPL-3.0 | ✓ | ✓ | v0.3.0 | 14d ago | active (14d) |
 | mcp-rs-siggen | public | 100 ✅ already public | ✓ | AGPL-3.0 | ✓ | ✓ | v0.2.0 | 14d ago | active (14d) |
