@@ -22,6 +22,8 @@ class MCPEntry(BaseModel):
     status: str  # public | private | commercial | hardware
     install: MCPInstall
     server_name: str
+    docs: str | None = None
+    min_version: str | None = None
 
     @property
     def is_installable(self) -> bool:

@@ -16,8 +16,8 @@ analysis, and lab-test stack.
 | **RF / Transmission lines** | `lineforge` | 🟢 public | Z₀, εeff, L, C, Rs, Gp for any 2D cross-section. Closed-form + bitmap. atlc2-compatible. |
 | **EM simulation** | `mcp-openems` | 🟢 public | 3D FDTD via openEMS — antennas, transmission lines, vias |
 | | `mcp-nec2-antenna` | 🟢 public | Wire-antenna method-of-moments |
-| | `mcp-cst-studio` | 💼 commercial | CST Studio Suite |
-| **PCB / SI** | `mcp-pcb-emcopilot` | 🟢 public | Layout review, return paths, decoupling, DDR/PCIe/USB SI |
+| | `mcp-cst-studio` | 🟢 public | CST Studio Suite wrapper (170 tools; CST license required at runtime) |
+| **PCB / SI** | `mcp-pcb-emcopilot` | 🟢 public | Layout review, return paths, decoupling, DDR/PCIe/USB SI, multi-market intake, schematic / layout / BOM 3-way cross-ref, KiCad parser |
 | **Circuit simulation** | `mcp-ltspice-qucs` | 🟢 public | LTspice + Qucs-S + scikit-rf, all Touchstone-aware |
 | **EMC regulatory** | `mcp-emc-regulations` | 🟢 public | FCC, CISPR, IEC, ISO, automotive OEM, medical EMC lookup |
 | **Diagrams / docs** | `drawio-engineering-mcp` | 🟢 public | RF block diagrams, PCB stack-ups, EMC test setups |

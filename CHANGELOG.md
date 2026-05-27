@@ -5,6 +5,35 @@ All notable changes to **eng-mcp-suite** are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] — 2026-05-27
+
+### Changed
+- **`mcp-cst-studio` flipped public.** The wrapper source is now
+  installable from GitHub anonymously (still AGPL-3.0-or-later; CST
+  Studio Suite license remains a runtime requirement for connected
+  mode — offline VBA-generation mode works without CST). Catalog
+  status moved from `commercial` → `public` and the install method
+  from `manual` → `git`. Before the flip, the upstream README was
+  refreshed to reflect the real tool count (170 tools across 20
+  categories — the prior "~107 across 16" doc was stale by 60%).
+- **`mcp-pcb-emcopilot` catalog entry refreshed for v0.4.0.** The
+  description now mentions multi-market intake (FCC Part 15 / CISPR /
+  automotive CISPR-25 / medical IEC-60601) with pre-flight gate,
+  schematic-aware analyzers + 3-way schematic / layout / BOM
+  cross-reference, KiCad sexpdata parser, and the cross-MCP intent
+  queue + limits provider that bridges into emc-regulations, openems,
+  nec2-antenna, and ltspice-qucs. `min_version` bumped 0.3.0 → 0.4.0.
+
+### Added
+- `min_version` and `docs` are now first-class fields on `MCPEntry`
+  in `manifest.py` (they were already used by `lineforge` but were
+  silently dropped by the Pydantic schema).
+
+### Audit
+- `AUDIT.md` regenerated: **14 / 15 catalog repos at score 100 ✅
+  public** (was 13 / 15). Only `mcp-rf-test` stays private (90,
+  Proprietary LICENSE — intentional).
+
 ## [1.1.0] — 2026-05-13
 
 ### Changed

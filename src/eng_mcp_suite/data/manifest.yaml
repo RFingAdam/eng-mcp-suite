@@ -145,7 +145,13 @@ mcps:
     description: |
       PCB EMC + SI analysis copilot. Decoupling, vias, return paths,
       crosstalk, plane resonances, DDR/PCIe/USB/Ethernet signal integrity,
-      EMI prediction, layout review automation.
+      EMI prediction, layout review automation. Multi-market intake
+      (FCC Part 15 / CISPR / automotive CISPR-25 / medical IEC-60601)
+      with a pre-flight gate. Schematic-aware analyzers and 3-way
+      schematic / layout / BOM cross-reference. KiCad sexpdata parser
+      for .kicad_sch / .kicad_pcb. Cross-MCP intent queue and limits
+      provider that bridges into emc-regulations, openems, nec2-antenna,
+      and ltspice-qucs.
     categories: [pcb, emc]
     repo: https://github.com/RFingAdam/mcp-pcb-emcopilot
     status: public
@@ -153,6 +159,7 @@ mcps:
       method: git
       package: git+https://github.com/RFingAdam/mcp-pcb-emcopilot.git
     server_name: pcb-emcopilot
+    min_version: "0.4.0"
 
   - name: mcp-ltspice-qucs
     description: |
@@ -184,17 +191,23 @@ mcps:
 
   - name: mcp-cst-studio
     description: |
-      CST Studio Suite (Dassault Systèmes) — full-wave 3D EM, antenna
-      design, PCB layout. Requires CST Studio license.
+      CST Studio Suite (Dassault Systèmes) wrapper — full-wave 3D EM,
+      antenna design, PCB layout. 170 tools across 20 categories,
+      including arrays, matching networks, optimization, and
+      diagnostics. Dual-mode: connected (Windows + live CST) or
+      offline (any OS, generates VBA scripts).
     categories: [em-sim, rf]
     repo: https://github.com/RFingAdam/mcp-cst-studio
-    status: commercial
+    status: public
     install:
-      method: manual
+      method: git
+      package: git+https://github.com/RFingAdam/mcp-cst-studio.git
       install_notes: |
-        Requires CST Studio Suite installation + license. Contact
-        RFingAdam for access.
+        Wrapper is open source (AGPL-3.0-or-later). USING it requires
+        a commercial CST Studio Suite license at runtime. Offline
+        mode (VBA script generation) works without a CST installation.
     server_name: cst-studio
+    min_version: "0.2.0"
 
   - name: mcp-rs-spectrum-analyzer
     description: |
