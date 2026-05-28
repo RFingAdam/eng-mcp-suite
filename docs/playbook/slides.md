@@ -252,7 +252,7 @@ public catalog. Bolt-on mechanism only.
 ## Getting started in 60 seconds
 
 ```bash
-pipx install eng-mcp-suite
+pipx install git+https://github.com/RFingAdam/eng-mcp-suite.git
 eng-mcp-suite install --workflow rf-design
 eng-mcp-suite config --workflow rf-design --out config.json
 # merge config.json mcpServers into your Claude Desktop config

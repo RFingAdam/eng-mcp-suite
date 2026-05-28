@@ -25,7 +25,6 @@ import yaml
 
 from eng_mcp_suite.manifest import Manifest
 
-
 DEFAULT_PRIVATE_PATH = Path.home() / ".config" / "eng_mcp_suite" / "private.yaml"
 
 

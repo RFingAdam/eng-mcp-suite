@@ -42,8 +42,8 @@ mcps:
     docs: https://rfingadam.github.io/lineforge/
     status: public
     install:
-      method: pip
-      package: lineforge
+      method: git
+      package: git+https://github.com/RFingAdam/lineforge.git
     server_name: lineforge
     min_version: "2.1.0"
 
@@ -58,8 +58,8 @@ mcps:
     repo: https://github.com/RFingAdam/mcp-emc-regulations
     status: public
     install:
-      method: pipx
-      package: mcp-emc-regulations
+      method: git
+      package: git+https://github.com/RFingAdam/mcp-emc-regulations.git
     server_name: emc-regulations
 
   - name: drawio-engineering-mcp
@@ -70,8 +70,8 @@ mcps:
     repo: https://github.com/RFingAdam/drawio-engineering-mcp
     status: public
     install:
-      method: pipx
-      package: drawio-engineering-mcp
+      method: git
+      package: git+https://github.com/RFingAdam/drawio-engineering-mcp.git
     server_name: drawio-engineering
 
   - name: mcp-blender
@@ -96,8 +96,8 @@ mcps:
     repo: https://github.com/RFingAdam/mcp-remote-access
     status: public
     install:
-      method: pipx
-      package: mcp-remote-access
+      method: git
+      package: git+https://github.com/RFingAdam/mcp-remote-access.git
     server_name: remote-access
 
   - name: copper-mountain-vna-mcp
@@ -109,8 +109,8 @@ mcps:
     repo: https://github.com/RFingAdam/copper-mountain-vna-mcp
     status: public
     install:
-      method: pipx
-      package: copper-mountain-vna-mcp
+      method: git
+      package: git+https://github.com/RFingAdam/copper-mountain-vna-mcp.git
     server_name: copper-mountain-vna
 
   # ── PRIVATE engineering MCPs (in suite for internal use; flip public as ready) ──

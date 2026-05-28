@@ -206,7 +206,7 @@ A few clarifications:
 ## Getting started
 
 ```bash
-pipx install eng-mcp-suite
+pipx install git+https://github.com/RFingAdam/eng-mcp-suite.git
 
 # See what's in the catalog
 eng-mcp-suite list

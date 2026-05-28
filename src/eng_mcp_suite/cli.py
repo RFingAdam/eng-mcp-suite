@@ -16,7 +16,6 @@ from eng_mcp_suite.manifest import WORKFLOWS, load_manifest
 from eng_mcp_suite.private_manifest import (
     DEFAULT_PRIVATE_PATH,
     load_merged_manifest,
-    resolve_private_path,
 )
 
 app = typer.Typer(

@@ -5,7 +5,7 @@ One page. Keep it open while you work.
 ## Install
 
 ```bash
-pipx install eng-mcp-suite
+pipx install git+https://github.com/RFingAdam/eng-mcp-suite.git
 
 eng-mcp-suite list                          # see the catalog
 eng-mcp-suite install --workflow rf-design  # install a bundle

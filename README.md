@@ -46,8 +46,8 @@ slot alongside the suite for the same workflows:
 ## Quick start (public starter pack)
 
 ```bash
-# Install the 5 public engineering MCPs + lineforge in one shot
-pipx install eng-mcp-suite  # (coming soon)
+# Install the suite CLI straight from GitHub (PyPI packaging planned)
+pipx install git+https://github.com/RFingAdam/eng-mcp-suite.git
 eng-mcp-suite install --workflow rf-design
 
 # Or pick a workflow bundle
@@ -130,7 +130,8 @@ on a real RF design point.
 
 ## Status
 
-Current version: **v0.3.0**. The
+Current version: **v1.3.0**. All 15 catalog entries are public-readiness
+score 100 except the intentionally-private `mcp-rf-test`. The
 [manifest](src/eng_mcp_suite/data/manifest.yaml) is the source of truth
 for what the suite knows about. Use `eng-mcp-suite list` to see all
 catalog entries and their status.
@@ -140,7 +141,11 @@ catalog entries and their status.
 - [x] v0.1: catalog manifest + README
 - [x] v0.2: `eng-mcp-suite install` CLI + per-MCP audit script
 - [x] v0.3: private bolt-on mechanism — see [docs/PRIVATE_BOLT_ON.md](docs/PRIVATE_BOLT_ON.md)
-- [ ] v1.0: all Tier 1 public MCPs at 90+ polish score, eng-mcp-suite on PyPI
+- [x] v1.0: all Tier 1 public MCPs at 90+ polish score, public launch
+- [x] v1.1: toolkit-wide relicense to AGPL-3.0-or-later
+- [x] v1.2: `mcp-cst-studio` public
+- [x] v1.3: git-based install for every catalog entry + CI
+- [ ] future: publish `eng-mcp-suite` and the public MCPs to PyPI for `pipx install eng-mcp-suite`
 
 ## License
 

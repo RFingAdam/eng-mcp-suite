@@ -5,6 +5,33 @@ All notable changes to **eng-mcp-suite** are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] — 2026-05-28
+
+### Fixed
+- **Every catalog entry now installs.** Five entries advertised `pip` /
+  `pipx` install methods pointing at packages that were never published
+  to PyPI (`lineforge`, `mcp-emc-regulations`, `drawio-engineering-mcp`,
+  `mcp-remote-access`, `copper-mountain-vna-mcp`) — so `eng-mcp-suite
+  install` would have failed on them. Switched all five to the `git`
+  method with `git+https://…` URLs, matching the rest of the catalog.
+  The installer's `git` method runs `pip install <git+https url>`, which
+  works today with no PyPI dependency.
+- README quick-start and the six `docs/playbook/*` references now use the
+  working `pipx install git+https://github.com/RFingAdam/eng-mcp-suite.git`
+  bootstrap instead of the not-yet-published `pipx install eng-mcp-suite`.
+
+### Changed
+- README **Status** section reconciled to reality: it claimed `v0.3.0`
+  with the `v1.0` milestone unchecked even though 1.0/1.1/1.2 had already
+  shipped and been tagged. Roadmap now reflects the real history, with
+  PyPI publishing called out as a *future* item rather than a done one.
+- Removed dead imports across `cli.py` and the test suite (ruff clean).
+
+### Added
+- **CI** — `.github/workflows/ci.yml` runs `ruff` + `pytest` on
+  Python 3.10–3.13 for every push and PR to `main`. The catalog repo had
+  no CI before this.
+
 ## [1.2.0] — 2026-05-27
 
 ### Changed

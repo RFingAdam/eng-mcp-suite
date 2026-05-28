@@ -16,8 +16,8 @@ def test_manifest_has_lineforge():
     e = mf.by_name("lineforge")
     assert e is not None
     assert "rf" in e.categories
-    assert e.install.method == "pip"
-    assert e.install.package == "lineforge"
+    assert e.install.method == "git"
+    assert e.install.package == "git+https://github.com/RFingAdam/lineforge.git"
 
 
 def test_manifest_by_status():

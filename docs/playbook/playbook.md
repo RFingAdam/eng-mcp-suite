@@ -257,7 +257,7 @@ your proposed MCP and the audit-score path.
 ## Where to go next
 
 - **First time?** Read the [cheat sheet](cheat-sheet.md), then
-  install via `pipx install eng-mcp-suite && eng-mcp-suite list`.
+  install via `pipx install git+https://github.com/RFingAdam/eng-mcp-suite.git && eng-mcp-suite list`.
 - **Want hands-on practice?** Walk through the
   [workshop](workshop.md).
 - **Giving a talk?** [Slides](slides.md) are pre-built Marp deck.

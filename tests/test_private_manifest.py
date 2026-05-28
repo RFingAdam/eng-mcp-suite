@@ -1,11 +1,7 @@
 """Tests for the user-local private manifest extension."""
 from __future__ import annotations
 
-import os
-from pathlib import Path
 from textwrap import dedent
-
-import pytest
 
 from eng_mcp_suite.manifest import Manifest
 from eng_mcp_suite.private_manifest import (

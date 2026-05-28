@@ -37,7 +37,7 @@ pipx --version
 # Claude Code:    https://www.anthropic.com/claude-code
 
 # 3. Install the suite installer
-pipx install eng-mcp-suite
+pipx install git+https://github.com/RFingAdam/eng-mcp-suite.git
 
 # 4. Install nec2c (the antenna solver binary)
 # Linux:    sudo apt install nec2c
