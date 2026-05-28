@@ -5,6 +5,28 @@ All notable changes to **eng-mcp-suite** are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] — 2026-05-28
+
+### Added
+- **Requirements / V&V capability cataloged.** `doc-testplan-generator` — a
+  requirements-management + test-plan + traceability platform (extract from
+  PDF/DOCX, requirement↔test linking, coverage/gap analysis, change-history
+  audit trail, compliance mapping for ISO 26262 / IEC 61508 / FDA 21 CFR
+  Part 11, 6 export formats) — is now a catalog entry. It ships a stdio MCP
+  (`generate_requirements`, `generate_testplan`, `export_traceability`) that
+  drafts requirements from the design artifacts the rest of the suite produces.
+  Listed as `status: private` with a `manual` install method, since it's
+  proprietary and its MCP is a thin client of a FastAPI backend that must be
+  running (the install notes document the `docker compose up` + `python -m
+  app.mcp.server` bootstrap).
+- New **`requirements`** category and a **`requirements`** workflow bundle
+  (`doc-testplan-generator` + `mcp-emc-regulations` + `mcp-pcb-emcopilot`) —
+  regulatory limits and PCB-review findings flowing into a requirements spec.
+
+### Changed
+- README catalog count `15` → `16`; new "Requirements / V&V" table row and
+  workflow description.
+
 ## [1.3.0] — 2026-05-28
 
 ### Fixed

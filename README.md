@@ -8,8 +8,8 @@ namespaced, and grouped by workflow.
 
 ## What's included
 
-This suite catalogs **15 engineering MCP servers** across the simulation,
-analysis, and lab-test stack.
+This suite catalogs **16 engineering MCP servers** across the simulation,
+analysis, lab-test, and requirements stack.
 
 | Category | MCP server | Status | What it does |
 |---|---|---|---|
@@ -28,6 +28,7 @@ analysis, and lab-test stack.
 | | `mcp-rs-spectrum-analyzer` | 🔧 hardware | R&S FSW / FSVA / FSV / FPL spectrum analyzers |
 | | `mcp-rs-cmw500` | 🔧 hardware | R&S CMW500 comms tester |
 | | `mcp-rs-siggen` | 🔧 hardware | R&S signal generators (SMW, SMBV, SGT, etc.) |
+| **Requirements / V&V** | `doc-testplan-generator` | 🔒 private | Requirements capture + test-plan generation + traceability — extract from PDF/DOCX, req↔test linking, coverage/gap, compliance (ISO 26262 / IEC 61508 / FDA 21 CFR Part 11), change-history audit. Drafts requirements from the suite's design artifacts. |
 
 🟢 public = installable by anyone today
 🔒 private = internal/access-restricted (not installable from public PyPI)
@@ -92,6 +93,12 @@ For test bench automation.
 - `mcp-rs-siggen` — signal generators (if hardware)
 - `mcp-rf-test` — embedded device compliance
 - `mcp-remote-access` — SSH + serial to DUTs
+
+### `requirements`
+For drafting and tracking engineering requirements from design artifacts.
+- `doc-testplan-generator` — requirements capture, traceability, test plans (private)
+- `mcp-emc-regulations` — regulatory limits that become requirements
+- `mcp-pcb-emcopilot` — design-review findings that requirements verify against
 
 ## How the MCPs tie together
 

@@ -85,6 +85,11 @@ WORKFLOWS: dict[str, list[str]] = {
         "mcp-remote-access",
         "copper-mountain-vna-mcp",
     ],
+    "requirements": [
+        "doc-testplan-generator",
+        "mcp-emc-regulations",
+        "mcp-pcb-emcopilot",
+    ],
 }
 
 

@@ -12,6 +12,7 @@
 #   mechanical    — Mechanical CAD, FEA, thermal
 #   lab-test      — Instrument control (VNA, SA, signal gen)
 #   docs          — Documentation, diagrams, regulatory lookup
+#   requirements  — Requirements capture, traceability, V&V / test planning
 #
 # Status:
 #   public        — Repo is public; can be installed by anyone
@@ -247,3 +248,28 @@ mcps:
       method: manual
       install_notes: Source is public, but requires R&S signal generator hardware to be useful.
     server_name: rs-siggen
+
+  # ── REQUIREMENTS / V&V (private; needs its own backend stack) ──
+
+  - name: doc-testplan-generator
+    description: |
+      Requirements management + test-plan generation + traceability. Extracts
+      requirements from PDF/DOCX/text, bidirectional requirement <-> test-case
+      linking, coverage / gap analysis, change-history audit trail, compliance
+      mapping (ISO 26262 / IEC 61508 / FDA 21 CFR Part 11), 100+ test templates,
+      6 export formats (PDF / DOCX / XLSX / Markdown / LaTeX / HTML). Ships a
+      stdio MCP (generate_requirements, generate_testplan, export_traceability)
+      that drafts requirements from the design artifacts the rest of the suite
+      produces.
+    categories: [requirements, docs]
+    repo: https://github.com/RFingAdam/doc-testplan-generator
+    status: private
+    install:
+      method: manual
+      install_notes: |
+        Private + proprietary (Agentarium license). The MCP is a stdio client of
+        the FastAPI backend, so it needs the backend running first: `docker
+        compose up` in doc-testplan-generator (Postgres + an AI provider key),
+        then register the MCP with command `python`, args `-m app.mcp.server`,
+        and env API_BASE_URL=http://localhost:8004/api/v1.
+    server_name: doc-testplan
